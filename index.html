@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruta Campings</title>
+
+  <!-- Hace que se vea como app -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f2f2f7;
+      margin: 0;
+      padding: 16px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .camping {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .camping > a {
+      display: block;
+      margin-top: 10px;
+      padding: 12px;
+      background: #007aff;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.buttons a {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.visited {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: #34c759;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.unvisit {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+
+<body>
+  <h1>Visitas Campings</h1>
+
+<div class="camping">
+  <strong>Camping Port de la Vall</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Port+de+la+Vall+Girona" style="background:#007aff;"
+onclick="markVisited('port-de-la-vall')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972387186" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-port-de-la-vall" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('port-de-la-vall')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping l'Arola</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+l'Arola+Girona" style="background:#007aff;"
+onclick="markVisited('c1')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972208027" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c1" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c1')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Joncar Mar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Joncar+Mar+Girona" style="background:#007aff;"
+onclick="markVisited('c2')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972256702" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c2" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c2')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping & Bungalow Salatà</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Salata+Girona" style="background:#007aff;"
+onclick="markVisited('c3')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972256086" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c3" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c3')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Rodas</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Rodas+Girona" style="background:#007aff;"
+onclick="markVisited('c4')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972257617" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c4" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c4')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Rubina Resort</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Rubina+Resort+Girona" style="background:#007aff;"
+onclick="markVisited('c5')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972450507" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c5" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c5')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Mas Nou</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Mas+Nou+Girona" style="background:#007aff;"
+onclick="markVisited('c6')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972454175" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c6" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c6')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Amfora</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Amfora+Girona" style="background:#007aff;"
+onclick="markVisited('c7')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972520540" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c7" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c7')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Las Dunas</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Las+Dunas+Girona" style="background:#007aff;"
+onclick="markVisited('c8')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972521717" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c8" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c9')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping l'Escala</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+l'Escala+Girona" style="background:#007aff;"
+onclick="markVisited('c10')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972770084" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c10" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c10')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Lacus</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Lacus+Girona" style="background:#007aff;"
+onclick="markVisited('c11')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34" style="background:#FF0000;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c11" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c11')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Wecamp l'Escala Punta Milà</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Wecamp+l'Escala+Punta+Mila+Girona" style="background:#007aff;"
+onclick="markVisited('c12')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34638652712" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c12" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c12')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cala Montgó</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cala+Montgo+Girona" style="background:#007aff;"
+onclick="markVisited('c13')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34" style="background:#FF0000;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c13" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c13')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Castell Montrgí</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Castell+Montrgi+Girona" style="background:#007aff;"
+onclick="markVisited('c14')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972751630" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c14" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c14')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Empordá</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Emporda+Girona" style="background:#007aff;"
+onclick="markVisited('c15')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972750649" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c15" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c15')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Les Medes</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Les+Medes+Girona" style="background:#007aff;"
+onclick="markVisited('c16')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972751805" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c16" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c16')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Delfín Verde</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Delfin+Verde+Girona" style="background:#007aff;"
+onclick="markVisited('c17')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972758454" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c17" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c17')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Playa Brava</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Playa+Brava+Girona" style="background:#007aff;"
+onclick="markVisited('c18')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972636894" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c18" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c18')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Alannina Neptuno</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Alannina+Neptuno+Girona" style="background:#007aff;"
+onclick="markVisited('c19')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972636731" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c19" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c19')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Interpals</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Interpals+Girona" style="background:#007aff;"
+onclick="markVisited('c20')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972636179" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c20" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c20')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cypsela Resort</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cypsela+Resort+Girona" style="background:#007aff;"
+onclick="markVisited('c21')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972667696" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c21" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('21')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Maset</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Maset+Girona" style="background:#007aff;"
+onclick="markVisited('c22')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972623023" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c22" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c22')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Kim's Camping Llafranc</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Kim's+Camping+Llafranc+Girona" style="background:#007aff;"
+onclick="markVisited('c23')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972301156" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c23" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c23')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping La Siesta</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+La+Siesta+Girona" style="background:#007aff;"
+onclick="markVisited('c24')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34684716683" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c24" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c24')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Calella de Palafrugell</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Calella+de+Palafrugell+Girona" style="background:#007aff;"
+onclick="markVisited('c25')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972615116" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c25" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c25')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Kampaoh</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Kampaoh+Girona" style="background:#007aff;"
+onclick="markVisited('c25')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34955252440" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c25" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c25')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Pla de la Torre</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Pla+de+la+Torre+Girona" style="background:#007aff;"
+onclick="markVisited('c26')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972650149" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c26" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c26')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Treumal</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Treumal+Girona" style="background:#007aff;"
+onclick="markVisited('c27')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972651095" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c27" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c27')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Intercalonge</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Intercalonge+Girona" style="background:#007aff;"
+onclick="markVisited('c28')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972651233" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c28" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c28')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Delfín Verde</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Delfin+Verde+Girona" style="background:#007aff;"
+onclick="markVisited('c29')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972816662" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c29" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c29')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Riembau</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Riembau+Girona" style="background:#007aff;"
+onclick="markVisited('c30')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972817123" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c30" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c30')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Vall d'Or</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Vall+d'Or+Girona" style="background:#007aff;"
+onclick="markVisited('c31')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972817585" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c31" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c31')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Sant Pol</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Sant+Pol+Girona" style="background:#007aff;"
+onclick="markVisited('c32')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34682627900" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c32" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c32')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cala Pola</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cala+Pola+Girona" style="background:#007aff;"
+onclick="markVisited('c33')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972341050" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c33" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c33')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Turismar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Turismar+Girona" style="background:#007aff;"
+onclick="markVisited('c34')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34691609227" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c34" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c34')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Tossa</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Tossa+Girona" style="background:#007aff;"
+onclick="markVisited('c35')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972340547" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c35" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c35')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cala Llevado</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cala+Llevado+Girona" style="background:#007aff;"
+onclick="markVisited('c36')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972983680" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c36" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c36')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Sènia Cala Canyelles</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Senia+Cala+Canyelles+Girona" style="background:#007aff;"
+onclick="markVisited('c36')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972651564" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c36" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c36')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Lloret Blau</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Lloret+Blau+Girona" style="background:#007aff;"
+onclick="markVisited('c37')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972365483" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c37" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c37')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping S'Abanell</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+S'Abanell+Girona" style="background:#007aff;"
+onclick="markVisited('c38')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972331809" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-c38" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c38')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping La Masia</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+La+Masia+Girona" style="background:#007aff;"
+onclick="markVisited('c39')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972331013" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c39" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c39')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cavall de Mar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cavall+de+Mar+Girona" style="background:#007aff;"
+onclick="markVisited('c40')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972331349" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-c40" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('c40')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Solmar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Solmar+Girona" style="background:#007aff;"
+onclick="markVisited('a1')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972348034" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a1" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a1')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Roca</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Roca+Girona" style="background:#007aff;"
+onclick="markVisited('a2')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972350436" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a2" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a2')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Bella Terra</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Bella+Terra+Girona" style="background:#007aff;"
+onclick="markVisited('a3')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972348017" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a3" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a3')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Voramar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Voramar+Girona" style="background:#007aff;"
+onclick="markVisited('a4')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972331805" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a4" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a4')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Pinar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Pinar+Girona" style="background:#007aff;"
+onclick="markVisited('a5')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34972331083" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a5" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a5')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping La Tordera-Nacions</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+La+Tordera+Nacions+Girona" style="background:#007aff;"
+onclick="markVisited('a6')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937612778" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a6" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a6')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Els Pins</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Els+Pins+Girona" style="background:#007aff;"
+onclick="markVisited('a7')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937653173" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a7" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a7')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Pla de Mar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Pla+de+Mar+Girona" style="background:#007aff;"
+onclick="markVisited('a8')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937611003" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a8" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a8')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping del Mar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+del+Mar+Girona" style="background:#007aff;"
+onclick="markVisited('a9')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937653767" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a9" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a9')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Stella Maris</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Stella+Maris+Girona" style="background:#007aff;"
+onclick="markVisited('a10')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937654883" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a10" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a10')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Bon Repós</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Bon+Repos+Barcelona" style="background:#007aff;"
+onclick="markVisited('a11')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937678475" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a11" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a12')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Oasis</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Oasis+Barcelona" style="background:#007aff;"
+onclick="markVisited('a13')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34938532383" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a13" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a13')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Enmar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Enmar+Barcelona" style="background:#007aff;"
+onclick="markVisited('a14')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937671730" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a14" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a14')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Bellsol</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Bellsol+Barcelona" style="background:#007aff;"
+onclick="markVisited('a15')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937671778" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a15" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a15')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Far</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Far+Barcelona" style="background:#007aff;"
+onclick="markVisited('a16')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937690967" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a16" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a16')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Globo</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Globo+Barcelona" style="background:#007aff;"
+onclick="markVisited('a17')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937941143" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a17" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a17')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Costa Dorada</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Costa+Dorada+Barcelona" style="background:#007aff;"
+onclick="markVisited('a18')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34663585595" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a18" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a18')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Toro Azul</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Toro+Azul+Barcelona" style="background:#007aff;"
+onclick="markVisited('a19')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937923303" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a19" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a19')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Marcos</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Marcos+Barcelona" style="background:#007aff;"
+onclick="markVisited('a20')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937921238" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a20" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a20')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Barcelona</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Barcelona+Barcelona" style="background:#007aff;"
+onclick="markVisited('a21')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34937904720" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a21" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a21')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Hola Camp</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Hola+Camp+Barcelona" style="background:#007aff;"
+onclick="markVisited('a22')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34936330637" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a22" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a22')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Estrella de Mar</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Estrella+de+Mar+Barcelona" style="background:#007aff;"
+onclick="markVisited('a23')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34936330784" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a23" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a23')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Platja Vilanova</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Platja+Vilanova+Barcelona" style="background:#007aff;"
+onclick="markVisited('a24')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34938950767" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a24" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a24')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Mar de Cunit</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Mar+de+Cunit+Tarragona" style="background:#007aff;"
+onclick="markVisited('a25')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34698796694" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a25" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a25')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Sant Salvador</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Sant+Salvador+Tarragona" style="background:#007aff;"
+onclick="markVisited('a26')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34931358536" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a26" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a26')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Arc de Bará</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Arc+de+Bara+Tarragona" style="background:#007aff;"
+onclick="markVisited('a27')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977800902" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a27" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a27')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Stel Roda de Berà</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Stel+Roda+de+Bera+Tarragona" style="background:#007aff;"
+onclick="markVisited('a28')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977802002" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a28" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a28')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Capfun</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Capfun+Tarragona" style="background:#007aff;"
+onclick="markVisited('a29')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977801903" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a29" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a29')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Miramar Playa</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Miramar+Playa+Tarragona" style="background:#007aff;"
+onclick="markVisited('a30')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977644705" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a30" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a30')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Tamarit Beach Resort</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Tamarit+Beach+Resort+Tarragona" style="background:#007aff;"
+onclick="markVisited('a31')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977650128" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a31" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a31')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Trillas</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Trillas+Tarragona" style="background:#007aff;"
+onclick="markVisited('a32')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977650249" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a32" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a32')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping La Llosa</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+La+Llosa+Tarragona" style="background:#007aff;"
+onclick="markVisited('a33')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977362615" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a33" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a33')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Alannina Resorts</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Alannina+Resorts+Tarragona" style="background:#007aff;"
+onclick="markVisited('a34')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34965484945" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a34" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a34')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping La Torre del Sol</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+La+Torre+del+Sol+Tarragona" style="background:#007aff;"
+onclick="markVisited('a35')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977810486" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a35" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a35')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Cala d'Oques</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Cala+d'Oques+Tarragona" style="background:#007aff;"
+onclick="markVisited('a36')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977823254" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a36" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a36')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping El Templo del Sol</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+El+Templo+del+Sol+Tarragona" style="background:#007aff;"
+onclick="markVisited('a37')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977823434" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a37" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a37')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Ametlla</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Ametlla+Tarragona" style="background:#007aff;"
+onclick="markVisited('a38')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977267784" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a38" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a38')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Taiga Resorts</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Taiga+Resorts+Tarragona" style="background:#007aff;"
+onclick="markVisited('a39')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34951204531" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-a39" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a39')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Capfun Deltebre</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Capfun+Deltebre+Tarragona" style="background:#007aff;"
+onclick="markVisited('a40')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977489904" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-a40" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('a40')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Delta Natura</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Delta+Natura+Tarragona" style="background:#007aff;"
+onclick="markVisited('b1')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977260552" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+ <div class="visited" id="visit-b1" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('b1')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<div class="camping">
+  <strong>Camping Estanyet</strong><br>
+  Girona
+
+  <div class="buttons">
+    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Estanyet+Tarragona" style="background:#007aff;"
+onclick="markVisited('b2')">
+      🧭 Navegar
+    </a>
+
+    <a href="tel:+34977737268" style="background:#34c759;">
+      📞 Llamar
+    </a>
+  </div>
+
+<div class="visited" id="visit-b2" style="display:none;">
+    ✅ Visitado
+    <button class="unvisit" onclick="unvisit('b2')">
+      (desmarcar)
+    </button>
+  </div>
+</div>
+
+<script>
+    function markVisited(id) {
+      localStorage.setItem(id, 'visited');
+      document.getElementById('visit-' + id).style.display = 'flex';
+    }
+
+    function unvisit(id) {
+      localStorage.removeItem(id);
+      document.getElementById('visit-' + id).style.display = 'none';
+    }
+
+    window.onload = function () {
+      document.querySelectorAll('[id^="visit-"]').forEach(el => {
+        const id = el.id.replace('visit-', '');
+        if (localStorage.getItem(id) === 'visited') {
+          el.style.display = 'flex';
+        }
+      });
+    };
+  </script>
+
+</body>
+</html>
