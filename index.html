@@ -3275,15 +3275,23 @@ actualizarResumen();
 
   /* VISITADOS */
   function markVisited(id) {
-    localStorage.setItem(id, "visited");
-    document.getElementById("visit-" + id).style.display = "block";
-actualizarResumen();
-  }
+  const hoy = new Date().toISOString().split("T")[0];
 
-  function unvisit(id) {
-    localStorage.removeItem(id);
-    document.getElementById("visit-" + id).style.display = "none";
-  }
+  localStorage.setItem("visit-" + id, hoy);
+
+  const badge = document.getElementById("visit-" + id);
+  if (badge) badge.style.display = "flex";
+  actualizarResumen();
+}
+
+function unvisit(id) {
+  localStorage.removeItem("visit-" + id);
+
+  const badge = document.getElementById("visit-" + id);
+  if (badge) badge.style.display = "none";
+
+  actualizarResumen();
+}
 
   /* NOTAS */
   function saveNote(id, text) {
