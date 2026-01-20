@@ -209,6 +209,32 @@ body {
   padding: 14px;
 }
 
+html, body {
+  height: auto !important;
+  overflow-y: auto !important;
+  overscroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+
+.camping {
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  scroll-snap-align: none !important;
+  page-break-inside: avoid;
+}
+
+/* Evita que iOS trate cada card como página */
+.camping * {
+  position: relative;
+}
+
+/* Modo coche: cards más compactas */
+.car-mode .camping {
+  padding-bottom: 18px;
+}
+
   </style>
 </head>
 
