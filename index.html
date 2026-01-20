@@ -3423,6 +3423,27 @@ function actualizarResumen() {
   `;
 }
 
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+
+  if (!link) return;
+
+  const isMaps =
+    link.href &&
+    (link.href.includes("google.com/maps") ||
+     link.href.includes("maps.apple.com"));
+
+  if (!isMaps) return;
+
+  const camping = link.closest(".camping");
+  if (!camping) return;
+
+  const id = camping.dataset.id;
+  if (!id) return;
+
+  markVisited(id);
+});
+
 </script>
 
 </body>
