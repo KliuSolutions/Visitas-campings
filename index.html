@@ -3358,41 +3358,45 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
+let geoWatchId = null;
+
 function calcularDistanciasDesdeMiUbicacion() {
   if (!navigator.geolocation) {
     mostrarErrorDistancia("Geolocalización no disponible");
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(
-  (pos) => {
-    const userLat = pos.coords.latitude;
-    const userLng = pos.coords.longitude;
+  if (geoWatchId !== null) return;
 
-    document.querySelectorAll(".camping").forEach(camping => {
-      const id = camping.dataset.id;
-      const nombre =
-        camping.querySelector("h2")?.textContent || "el camping";
+  geoWatchId = navigator.geolocation.watchPosition(
+    (pos) => {
+      const userLat = pos.coords.latitude;
+      const userLng = pos.coords.longitude;
 
-      const lat = parseFloat(camping.dataset.lat);
-      const lng = parseFloat(camping.dataset.lng);
-      const distDiv = camping.querySelector(".distance");
+      document.querySelectorAll(".camping").forEach(camping => {
+        const id = camping.dataset.id;
+        const nombre =
+          camping.querySelector("h2")?.textContent || "el camping";
 
-      if (!lat || !lng || !distDiv || !id) return;
+        const lat = parseFloat(camping.dataset.lat);
+        const lng = parseFloat(camping.dataset.lng);
+        const distDiv = camping.querySelector(".distance");
 
-      const km = calcularDistancia(userLat, userLng, lat, lng);
+        if (!lat || !lng || !distDiv || !id) return;
 
-      // 🚨 AVISO DE CERCANÍA (100 m)
-      if (km <= 0.1 && !yaAvisado(id)) {
-        avisarCercania(nombre);
-        marcarAvisado(id);
-      }
+        const km = calcularDistancia(userLat, userLng, lat, lng);
 
-      distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
-    });
-  },
+        distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
+
+        // 🚨 AVISO DE CERCANÍA (100 m)
+        if (km <= 0.1 && !yaAvisado(id)) {
+          avisarCercania(nombre);
+          marcarAvisado(id);
+        }
+      });
+    },
     (error) => {
-      let msg = "Ubicación no permitida";
+      let msg = "Error de ubicación";
       if (error.code === 1) msg = "Permiso de ubicación denegado";
       if (error.code === 2) msg = "Ubicación no disponible";
       if (error.code === 3) msg = "Tiempo de espera agotado";
@@ -3400,8 +3404,8 @@ function calcularDistanciasDesdeMiUbicacion() {
     },
     {
       enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
+      maximumAge: 10000,
+      timeout: 20000
     }
   );
 }
