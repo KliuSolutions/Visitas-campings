@@ -3461,6 +3461,23 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+  if (!link) return;
+
+  // Solo botones de navegar (tienen emoji o texto Navegar)
+  if (!link.textContent.toLowerCase().includes("naveg")) return;
+
+  const camping = link.closest(".camping");
+  if (!camping) return;
+
+  const id = camping.dataset.id;
+  if (!id) return;
+
+  // Marca como visitado + actualiza contador
+  markVisited(id);
+});
+
 </script>
 
 </body>
