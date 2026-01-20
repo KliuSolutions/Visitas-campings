@@ -229,6 +229,27 @@ html, body {
   padding-bottom: 18px;
 }
 
+/* ===== RESUMEN DIARIO ===== */
+#daily-summary {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+#daily-summary div {
+  flex: 1;
+}
+
+#daily-summary strong {
+  display: block;
+  font-size: 20px;
+}
+
   </style>
 </head>
 
@@ -243,6 +264,7 @@ html, body {
 -->
 
 <h1>Visitas Campings</h1>
+<div id="daily-summary"></div>
 
 <div class="top-actions">
   <button id="carModeBtn" onclick="toggleCarMode()">🚗 Modo coche</button>
@@ -3248,12 +3270,14 @@ onclick="markVisited('b2')">
     setTimeout(() => {
       document.getElementById("splash").classList.add("hide");
     }, 1000);
+actualizarResumen();
   });
 
   /* VISITADOS */
   function markVisited(id) {
     localStorage.setItem(id, "visited");
     document.getElementById("visit-" + id).style.display = "block";
+actualizarResumen();
   }
 
   function unvisit(id) {
@@ -3369,6 +3393,36 @@ function mostrarErrorDistancia(texto) {
 window.addEventListener("load", () => {
   calcularDistanciasDesdeMiUbicacion();
 });
+
+function actualizarResumen() {
+  const hoy = new Date().toISOString().split("T")[0];
+  const campings = document.querySelectorAll(".camping");
+
+  let visitadosHoy = 0;
+  let visitadosTotal = 0;
+
+  campings.forEach(c => {
+    const textarea = c.querySelector(".notes");
+    if (!textarea) return;
+
+    const id = textarea.dataset.id;
+    const fecha = localStorage.getItem("visit-" + id);
+
+    if (fecha) {
+      visitadosTotal++;
+      if (fecha === hoy) visitadosHoy++;
+    }
+  });
+
+  const pendientes = campings.length - visitadosTotal;
+
+  document.getElementById("daily-summary").innerHTML = `
+    <div><strong>${visitadosHoy}</strong>Hoy</div>
+    <div><strong>${pendientes}</strong>Pendientes</div>
+    <div><strong>${visitadosTotal}</strong>Total</div>
+  `;
+}
+
 </script>
 
 </body>
