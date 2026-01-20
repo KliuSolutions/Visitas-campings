@@ -3444,6 +3444,23 @@ document.addEventListener("click", function (e) {
   markVisited(id);
 });
 
+let ultimoCampingNavegado = null;
+
+document.querySelectorAll(".camping a").forEach(link => {
+  link.addEventListener("click", () => {
+    const camping = link.closest(".camping");
+    if (!camping) return;
+    ultimoCampingNavegado = camping.dataset.id;
+  });
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && ultimoCampingNavegado) {
+    markVisited(ultimoCampingNavegado);
+    ultimoCampingNavegado = null;
+  }
+});
+
 </script>
 
 </body>
