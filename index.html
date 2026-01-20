@@ -270,6 +270,10 @@ html, body {
   <button id="carModeBtn" onclick="toggleCarMode()">🚗 Modo coche</button>
 </div>
 
+<button id="activarAvisos" style="margin-bottom:10px">
+  🔔 Activar avisos de cercanía
+</button>
+
 <div class="filter-bar">
   <button id="f-all" onclick="setFilter('all')" class="active">Todos</button>
   <button id="f-visited" onclick="setFilter('visited')">Visitados</button>
@@ -3411,7 +3415,6 @@ function mostrarErrorDistancia(texto) {
 /* Lanzar cálculo al cargar */
 window.addEventListener("load", () => {
   calcularDistanciasDesdeMiUbicacion();
-pedirPermisoNotificaciones();
 });
 
 function actualizarResumen() {
@@ -3528,6 +3531,10 @@ function yaAvisado(id) {
 function marcarAvisado(id) {
   localStorage.setItem("near-" + id, "1");
 }
+
+document.getElementById("activarAvisos")?.addEventListener("click", () => {
+  pedirPermisoNotificaciones();
+});
 
 </script>
 
