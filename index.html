@@ -270,10 +270,6 @@ html, body {
   <button id="carModeBtn" onclick="toggleCarMode()">🚗 Modo coche</button>
 </div>
 
-<button id="activarAvisos" style="margin-bottom:10px">
-  🔔 Activar avisos de cercanía
-</button>
-
 <div class="filter-bar">
   <button id="f-all" onclick="setFilter('all')" class="active">Todos</button>
   <button id="f-visited" onclick="setFilter('visited')">Visitados</button>
@@ -3269,22 +3265,17 @@ onclick="markVisited('b2')">
 </div>
 
 <script>
-  /* SPLASH */
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("splash").classList.add("hide");
-    }, 1000);
-actualizarResumen();
-  });
+/* =======================
+   VISITADOS + CONTADOR
+======================= */
 
-  /* VISITADOS */
-  function markVisited(id) {
+function markVisited(id) {
   const hoy = new Date().toISOString().split("T")[0];
-
   localStorage.setItem("visit-" + id, hoy);
 
   const badge = document.getElementById("visit-" + id);
   if (badge) badge.style.display = "flex";
+
   actualizarResumen();
 }
 
@@ -3297,53 +3288,78 @@ function unvisit(id) {
   actualizarResumen();
 }
 
-  /* NOTAS */
-  function saveNote(id, text) {
-    localStorage.setItem("note-" + id, text);
-  }
+function actualizarResumen() {
+  const hoy = new Date().toISOString().split("T")[0];
+  const campings = document.querySelectorAll(".camping");
 
-  /* FILTRO */
-  function setFilter(type) {
-    localStorage.setItem("camping-filter", type);
+  let visitadosHoy = 0;
+  let visitadosTotal = 0;
 
-    document.querySelectorAll(".filter-bar button").forEach(b => b.classList.remove("active"));
-    document.getElementById("f-" + type).classList.add("active");
+  campings.forEach(c => {
+    const id = c.dataset.id;
+    const fecha = localStorage.getItem("visit-" + id);
 
-    document.querySelectorAll(".camping").forEach(c => {
-      const v = c.querySelector(".visited");
-      const isVisited = v && v.style.display !== "none";
-      c.style.display =
-        type === "all" ||
-        (type === "visited" && isVisited) ||
-        (type === "notVisited" && !isVisited)
-          ? "block" : "none";
-    });
-  }
-
-  /* MODO COCHE */
-  function toggleCarMode() {
-    document.body.classList.toggle("car-mode");
-    const btn = document.getElementById("carModeBtn");
-    btn.innerText = document.body.classList.contains("car-mode")
-      ? "🚘 Modo normal"
-      : "🚗 Modo coche";
-  }
-
- window.addEventListener("load", () => {
-  document.querySelectorAll(".visited").forEach(v => {
-    const id = v.id.replace("visit-", "");
-    if (localStorage.getItem("visit-" + id)) {
-      v.style.display = "block";
+    if (fecha) {
+      visitadosTotal++;
+      if (fecha === hoy) visitadosHoy++;
     }
   });
 
-    document.querySelectorAll(".notes").forEach(n => {
-      const id = n.dataset.id;
-      n.value = localStorage.getItem("note-" + id) || "";
-    });
+  const pendientes = campings.length - visitadosTotal;
 
-    setFilter(localStorage.getItem("camping-filter") || "all");
+  document.getElementById("daily-summary").innerHTML = `
+    <div><strong>${visitadosHoy}</strong>Hoy</div>
+    <div><strong>${pendientes}</strong>Pendientes</div>
+    <div><strong>${visitadosTotal}</strong>Total</div>
+  `;
+}
+
+/* =======================
+   NOTAS
+======================= */
+
+function saveNote(id, text) {
+  localStorage.setItem("note-" + id, text);
+}
+
+/* =======================
+   FILTRO
+======================= */
+
+function setFilter(type) {
+  localStorage.setItem("camping-filter", type);
+
+  document.querySelectorAll(".filter-bar button")
+    .forEach(b => b.classList.remove("active"));
+  document.getElementById("f-" + type).classList.add("active");
+
+  document.querySelectorAll(".camping").forEach(c => {
+    const v = c.querySelector(".visited");
+    const isVisited = v && v.style.display !== "none";
+
+    c.style.display =
+      type === "all" ||
+      (type === "visited" && isVisited) ||
+      (type === "notVisited" && !isVisited)
+        ? "block" : "none";
   });
+}
+
+/* =======================
+   MODO COCHE
+======================= */
+
+function toggleCarMode() {
+  document.body.classList.toggle("car-mode");
+  const btn = document.getElementById("carModeBtn");
+  btn.innerText = document.body.classList.contains("car-mode")
+    ? "🚘 Modo normal"
+    : "🚗 Modo coche";
+}
+
+/* =======================
+   DISTANCIA (ESTABLE iOS)
+======================= */
 
 function calcularDistancia(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -3371,22 +3387,14 @@ function calcularDistanciasDesdeMiUbicacion() {
       const userLng = pos.coords.longitude;
 
       document.querySelectorAll(".camping").forEach(camping => {
-        const id = camping.dataset.id;
-        const nombre = camping.querySelector("h2")?.textContent || "el camping";
-
         const lat = parseFloat(camping.dataset.lat);
         const lng = parseFloat(camping.dataset.lng);
         const distDiv = camping.querySelector(".distance");
 
-        if (isNaN(lat) || isNaN(lng) || !distDiv || !id) return;
+        if (isNaN(lat) || isNaN(lng) || !distDiv) return;
 
         const km = calcularDistancia(userLat, userLng, lat, lng);
         distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
-
-        if (km <= 0.1 && !yaAvisado(id)) {
-          avisarCercania(nombre);
-          marcarAvisado(id);
-        }
       });
     },
     () => {
@@ -3396,145 +3404,38 @@ function calcularDistanciasDesdeMiUbicacion() {
   );
 }
 
-/* recalcula cada 15 segundos */
-setInterval(calcularDistanciasDesdeMiUbicacion, 15000);
+function mostrarErrorDistancia(texto) {
+  document.querySelectorAll(".distance").forEach(div => {
+    div.textContent = `⚠️ ${texto}`;
+  });
+}
 
-window.addEventListener("load", calcularDistanciasDesdeMiUbicacion);
+/* =======================
+   CARGA INICIAL
+======================= */
 
-function actualizarResumen() {
-  const hoy = new Date().toISOString().split("T")[0];
-  const campings = document.querySelectorAll(".camping");
-
-  let visitadosHoy = 0;
-  let visitadosTotal = 0;
-
-  campings.forEach(c => {
-    const textarea = c.querySelector(".notes");
-    if (!textarea) return;
-
-    const id = textarea.dataset.id;
-    const fecha = localStorage.getItem("visit-" + id);
-
-    if (fecha) {
-      visitadosTotal++;
-      if (fecha === hoy) visitadosHoy++;
+window.addEventListener("load", () => {
+  // restaurar visitados
+  document.querySelectorAll(".visited").forEach(v => {
+    const id = v.id.replace("visit-", "");
+    if (localStorage.getItem("visit-" + id)) {
+      v.style.display = "flex";
     }
   });
 
-  const pendientes = campings.length - visitadosTotal;
-
-  document.getElementById("daily-summary").innerHTML = `
-    <div><strong>${visitadosHoy}</strong>Hoy</div>
-    <div><strong>${pendientes}</strong>Pendientes</div>
-    <div><strong>${visitadosTotal}</strong>Total</div>
-  `;
-}
-
-document.addEventListener("click", function (e) {
-  const link = e.target.closest("a");
-
-  if (!link) return;
-
-  const isMaps =
-    link.href &&
-    (link.href.includes("google.com/maps") ||
-     link.href.includes("maps.apple.com"));
-
-  if (!isMaps) return;
-
-  const camping = link.closest(".camping");
-  if (!camping) return;
-
-  const id = camping.dataset.id;
-  if (!id) return;
-
-  markVisited(id);
-});
-
-let ultimoCampingNavegado = null;
-
-document.querySelectorAll(".camping a").forEach(link => {
-  link.addEventListener("click", () => {
-    const camping = link.closest(".camping");
-    if (!camping) return;
-    ultimoCampingNavegado = camping.dataset.id;
+  // restaurar notas
+  document.querySelectorAll(".notes").forEach(n => {
+    const id = n.dataset.id;
+    n.value = localStorage.getItem("note-" + id) || "";
   });
+
+  setFilter(localStorage.getItem("camping-filter") || "all");
+  actualizarResumen();
+  calcularDistanciasDesdeMiUbicacion();
 });
 
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible" && ultimoCampingNavegado) {
-    markVisited(ultimoCampingNavegado);
-    ultimoCampingNavegado = null;
-  }
-});
-
-document.addEventListener("click", function (e) {
-  const link = e.target.closest("a");
-  if (!link) return;
-
-  // Solo botones de navegar (tienen emoji o texto Navegar)
-  if (!link.textContent.toLowerCase().includes("naveg")) return;
-
-  const camping = link.closest(".camping");
-  if (!camping) return;
-
-  const id = camping.dataset.id;
-  if (!id) return;
-
-  // Marca como visitado + actualiza contador
-  markVisited(id);
-});
-
-function pedirPermisoNotificaciones() {
-  if (!("Notification" in window)) return;
-
-  if (Notification.permission === "default") {
-    Notification.requestPermission();
-  }
-}
-
-function avisarCercania(nombre) {
-  // Vibración
-  if ("vibrate" in navigator) {
-    navigator.vibrate([200, 100, 200]);
-  }
-
-function pedirPermisoNotificaciones() {
-  if (!("Notification" in window)) {
-    alert("Este navegador no soporta notificaciones");
-    return;
-  }
-
-  Notification.requestPermission().then(p => {
-    alert("Permiso de notificaciones: " + p);
-  });
-}
-
-function avisarCercania(nombre) {
-  if ("vibrate" in navigator) {
-    navigator.vibrate([200, 100, 200]);
-  }
-
-  if (Notification.permission === "granted") {
-    new Notification("📍 Estás llegando", {
-      body: `Estás muy cerca de ${nombre}`,
-      icon: "icon-192.png"
-    });
-  }
-}
-
-function yaAvisado(id) {
-  return localStorage.getItem("near-" + id) === "1";
-}
-
-function marcarAvisado(id) {
-  localStorage.setItem("near-" + id, "1");
-}
-
-document.getElementById("activarAvisos")?.addEventListener("click", () => {
-  pedirPermisoNotificaciones();
-});
-
+// recalcula distancia cada 15s
+setInterval(calcularDistanciasDesdeMiUbicacion, 15000);
 </script>
 
 </body>
