@@ -3359,25 +3359,20 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
-let geoWatchId = null;
-
 function calcularDistanciasDesdeMiUbicacion() {
   if (!navigator.geolocation) {
     mostrarErrorDistancia("Geolocalización no disponible");
     return;
   }
 
-  if (geoWatchId !== null) return;
-
-  geoWatchId = navigator.geolocation.watchPosition(
+  navigator.geolocation.getCurrentPosition(
     (pos) => {
       const userLat = pos.coords.latitude;
       const userLng = pos.coords.longitude;
 
       document.querySelectorAll(".camping").forEach(camping => {
         const id = camping.dataset.id;
-        const nombre =
-          camping.querySelector("h2")?.textContent || "el camping";
+        const nombre = camping.querySelector("h2")?.textContent || "el camping";
 
         const lat = parseFloat(camping.dataset.lat);
         const lng = parseFloat(camping.dataset.lng);
@@ -3386,41 +3381,25 @@ function calcularDistanciasDesdeMiUbicacion() {
         if (isNaN(lat) || isNaN(lng) || !distDiv || !id) return;
 
         const km = calcularDistancia(userLat, userLng, lat, lng);
-
         distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
 
-        // 🚨 AVISO DE CERCANÍA (100 m)
         if (km <= 0.1 && !yaAvisado(id)) {
           avisarCercania(nombre);
           marcarAvisado(id);
         }
       });
     },
-    (error) => {
-      let msg = "Error de ubicación";
-      if (error.code === 1) msg = "Permiso de ubicación denegado";
-      if (error.code === 2) msg = "Ubicación no disponible";
-      if (error.code === 3) msg = "Tiempo de espera agotado";
-      mostrarErrorDistancia(msg);
+    () => {
+      mostrarErrorDistancia("Permiso de ubicación denegado");
     },
-    {
-      enableHighAccuracy: true,
-      maximumAge: 10000,
-      timeout: 20000
-    }
+    { enableHighAccuracy: true }
   );
 }
 
-function mostrarErrorDistancia(texto) {
-  document.querySelectorAll(".distance").forEach(div => {
-    div.textContent = `⚠️ ${texto}`;
-  });
-}
+/* recalcula cada 15 segundos */
+setInterval(calcularDistanciasDesdeMiUbicacion, 15000);
 
-/* Lanzar cálculo al cargar */
-window.addEventListener("load", () => {
-  calcularDistanciasDesdeMiUbicacion();
-});
+window.addEventListener("load", calcularDistanciasDesdeMiUbicacion);
 
 function actualizarResumen() {
   const hoy = new Date().toISOString().split("T")[0];
@@ -3520,7 +3499,22 @@ function avisarCercania(nombre) {
     navigator.vibrate([200, 100, 200]);
   }
 
-  // Notificación
+function pedirPermisoNotificaciones() {
+  if (!("Notification" in window)) {
+    alert("Este navegador no soporta notificaciones");
+    return;
+  }
+
+  Notification.requestPermission().then(p => {
+    alert("Permiso de notificaciones: " + p);
+  });
+}
+
+function avisarCercania(nombre) {
+  if ("vibrate" in navigator) {
+    navigator.vibrate([200, 100, 200]);
+  }
+
   if (Notification.permission === "granted") {
     new Notification("📍 Estás llegando", {
       body: `Estás muy cerca de ${nombre}`,
