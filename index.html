@@ -250,6 +250,10 @@ html, body {
   font-size: 20px;
 }
 
+.notes {
+  box-sizing: border-box;
+}
+
   </style>
 </head>
 
@@ -3407,7 +3411,12 @@ function calcularDistanciasDesdeMiUbicacion() {
         if (isNaN(lat) || isNaN(lng) || !distDiv) return;
 
         const km = calcularDistancia(userLat, userLng, lat, lng);
-        distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
+
+if (km <= 0.1) {
+  distDiv.textContent = "✅ Estás muy cerca";
+} else {
+  distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
+}
       });
     },
     () => {
