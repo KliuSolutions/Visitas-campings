@@ -3329,12 +3329,13 @@ function unvisit(id) {
       : "🚗 Modo coche";
   }
 
-  /* CARGA INICIAL */
-  window.addEventListener("load", () => {
-    document.querySelectorAll(".visited").forEach(v => {
-      const id = v.id.replace("visit-", "");
-      if (localStorage.getItem(id) === "visited") v.style.display = "block";
-    });
+ window.addEventListener("load", () => {
+  document.querySelectorAll(".visited").forEach(v => {
+    const id = v.id.replace("visit-", "");
+    if (localStorage.getItem("visit-" + id)) {
+      v.style.display = "block";
+    }
+  });
 
     document.querySelectorAll(".notes").forEach(n => {
       const id = n.dataset.id;
@@ -3382,7 +3383,7 @@ function calcularDistanciasDesdeMiUbicacion() {
         const lng = parseFloat(camping.dataset.lng);
         const distDiv = camping.querySelector(".distance");
 
-        if (!lat || !lng || !distDiv || !id) return;
+        if (isNaN(lat) || isNaN(lng) || !distDiv || !id) return;
 
         const km = calcularDistancia(userLat, userLng, lat, lng);
 
