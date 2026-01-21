@@ -3436,6 +3436,26 @@ window.addEventListener("load", () => {
 
 // recalcula distancia cada 15s
 setInterval(calcularDistanciasDesdeMiUbicacion, 15000);
+
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+  if (!link) return;
+
+  // Solo enlaces de navegación (Google Maps / Apple Maps)
+  if (
+    link.href.includes("google.com/maps") ||
+    link.href.includes("maps.apple.com")
+  ) {
+    const camping = link.closest(".camping");
+    if (!camping) return;
+
+    const id = camping.dataset.id;
+    if (!id) return;
+
+    markVisited(id);
+  }
+});
+
 </script>
 
 </body>
