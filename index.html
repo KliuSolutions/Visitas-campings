@@ -281,7 +281,7 @@ html, body {
 </div>
 
 <!-- ⬇️ AQUÍ EMPIEZAN LOS CAMPINGS -->
-<div class="camping" data-lat="41.46487" data-lng="2.01122">
+<div class="camping" data-lat="42.34322" data-lng="3.18414">
   <strong>Camping Port de la Vall</strong><br>
   Girona
 <div class="distance">📍 Calculando distancia…</div>
@@ -3413,7 +3413,7 @@ function calcularDistanciasDesdeMiUbicacion() {
         const km = calcularDistancia(userLat, userLng, lat, lng);
 
 if (km <= 0.1) {
-  distDiv.textContent = "✅ Estás muy cerca";
+  distDiv.textContent = "✅ A <100m";
 } else {
   distDiv.textContent = `📍 A ${km.toFixed(1)} km de tu posición`;
 }
