@@ -3265,6 +3265,19 @@ onclick="markVisited('b2')">
 </div>
 
 <script>
+
+// AUTO-ARREGLAR data-id EN LOS CAMPINGS
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".camping").forEach(camping => {
+    if (!camping.dataset.id) {
+      const textarea = camping.querySelector(".notes");
+      if (textarea && textarea.dataset.id) {
+        camping.dataset.id = textarea.dataset.id;
+      }
+    }
+  });
+});
+
 /* =======================
    VISITADOS + CONTADOR
 ======================= */
